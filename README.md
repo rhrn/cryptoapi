@@ -1,6 +1,5 @@
 ![logo](assets/logo.png)
 
-# Cryptoapi
 > Proxy and collect crypto api data
 
 * [x] Cryptocompare 
@@ -19,6 +18,19 @@ cp .env.default .env # edit .env to configure
 ```
 docker-compose -f docker-compose.yaml -f docker-compose.yugabyte.yaml build
 docker-compose -f docker-compose.yaml -f docker-compose.yugabyte.yaml up
+```
+
+### Request examples
+
+#### Http by `curl`
+```
+curl "http://localhost:3000/cryptocompare?fsyms=BTC&tsyms=USD"
+```
+
+#### Websocket by `wscat`
+```
+wscat -c ws://localhost:3000/cryptocompare
+> {"message": "prices", "fsyms": ["BTC"], "tsyms": ["USD"] }
 ```
 
 ## Dev
@@ -47,19 +59,6 @@ npm run dev
 ```
 PGDB_URL=postgres://postgres@localhost:5433/cryptoapi_test npx prisma migrate deploy
 PGDB_URL=postgres://postgres@localhost:5433/cryptoapi_test npm test
-```
-
-## Request examples
-
-### Http by `curl`
-```
-curl "http://localhost:3000/cryptocompare?fsyms=BTC&tsyms=USD"
-```
-
-### Websocket by `wscat`
-```
-wscat -c ws://localhost:3000/cryptocompare
-> {"message": "prices", "fsyms": ["BTC"], "tsyms": ["USD"] }
 ```
 
 ## Test build
