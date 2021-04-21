@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+
+  cryptoapi-init:
+    image: rhrn/cryptoapi:latest
+    env_file: .env
+    command: npx prisma migrate deploy
+    depends_on:
+      - yb-tserver
+
+  cryptoapi:
+    build:
+      context: .
+    image: rhrn/cryptoapi:latest
+    env_file: .env
+    ports:
+      - 3003:3000
+    depends_on:
+      - cryptoapi-init
+    logging: &default-logging
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '2'
+
