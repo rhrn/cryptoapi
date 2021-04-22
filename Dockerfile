@@ -25,6 +25,4 @@ WORKDIR /app
 
 COPY --from=0 /app .
 
-RUN npm i prisma # workaround
-
 CMD ["node", "dist/server"]
