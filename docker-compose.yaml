@@ -15,7 +15,7 @@ services:
     image: rhrn/cryptoapi:latest
     env_file: .env
     ports:
-      - 3003:3000
+      - 3000:3000
     depends_on:
       - cryptoapi-init
     logging: &default-logging
